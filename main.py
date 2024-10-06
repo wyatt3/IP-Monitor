@@ -1,8 +1,10 @@
 import requests
+import os
 
 discordUrl = "https://discord.com/api/webhooks/"
+txt = os.path.dirname(os.path.abspath(__file__)) + '/ip.txt'
 
-with open('ip.txt', 'r') as f:
+with open(txt, 'r') as f:
     lines = f.readlines()
     f.close()
 
@@ -16,6 +18,6 @@ if lines[0] != r.text:
     }
     requests.post(discordUrl, json = message)
 
-    with open('ip.txt', 'w') as f:
+    with open(txt, 'w') as f:
         f.write(r.text)
         f.close()

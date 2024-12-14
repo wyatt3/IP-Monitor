@@ -1,7 +1,9 @@
+from dotenv import load_dotenv
 import requests
 import os
 
-discordUrl = "https://discord.com/api/webhooks/"
+load_dotenv()
+
 txt = os.path.dirname(os.path.abspath(__file__)) + '/ip.txt'
 
 with open(txt, 'r') as f:

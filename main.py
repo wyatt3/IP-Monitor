@@ -18,8 +18,16 @@ if lines[0] != r.text:
         "username": "IP Monitor",
         "avatar_url": "https://i.imgur.com/lCObCxd.gif"
     }
-    requests.post(discordUrl, json = message)
+
+    requests.get('https://www.duckdns.org/update?domains=' + os.getenv('DUCK_DNS_DOMAIN') + '&token=' + os.getenv('DUCK_DNS_TOKEN'))
 
     with open(txt, 'w') as f:
         f.write(r.text)
         f.close()
+
+    message = {
+        "content": "IP address has changed from " + lines[0] + " to " + r.text + "\n IP address updated on DuckDNS.",
+        "username": "IP Monitor",
+        "avatar_url": "https://i.imgur.com/lCObCxd.gif"
+    }
+    requests.post(os.getenv('DISCORD_URL'), json = message)

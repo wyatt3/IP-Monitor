@@ -14,7 +14,7 @@ r = requests.get('http://ipv4.icanhazip.com')
 
 if lines[0] != r.text:
     message = {
-        "content": "IP address has changed from " + lines[0] + " to " + r.text,
+        "content": "IP address for " + os.getenv('DUCK_DNS_DOMAIN') + " has changed from " + lines[0] + " to " + r.text,
         "username": "IP Monitor",
         "avatar_url": "https://i.imgur.com/lCObCxd.gif"
     }
@@ -25,9 +25,4 @@ if lines[0] != r.text:
         f.write(r.text)
         f.close()
 
-    message = {
-        "content": "IP address has changed from " + lines[0] + " to " + r.text + "\n IP address updated on DuckDNS.",
-        "username": "IP Monitor",
-        "avatar_url": "https://i.imgur.com/lCObCxd.gif"
-    }
     requests.post(os.getenv('DISCORD_URL'), json = message)
